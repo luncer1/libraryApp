@@ -1,0 +1,498 @@
+* {
+  box-sizing: border-box;
+  padding: 0;
+  margin: 0;
+  font-family: "Poppins", sans-serif;
+  font-weight: 400;
+}
+
+header {
+  width: 100%;
+  padding-bottom: 1em;
+  color: #ddd;
+}
+header .login-bar {
+  height: 60px;
+  border-bottom: 2px solid #999;
+  background-color: #222;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+}
+header .login-bar .login-list {
+  min-width: 25%;
+  height: 100%;
+  line-height: 60px;
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  list-style: none;
+}
+header .login-bar .login-list .login-element {
+  min-width: 200px;
+}
+header .login-bar .login-list a {
+  text-decoration: none;
+  flex-grow: 1;
+  color: inherit;
+  padding-left: 3%;
+}
+header .login-bar .login-list a:hover {
+  color: #bbb;
+}
+header .logo-bar {
+  width: 100%;
+}
+header .logo-bar-image {
+  background-image: url("/images/logo-bar.jpg");
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-position: 0 15%;
+  min-height: 25em;
+}
+header .menu-bar {
+  width: 100%;
+  height: 100px;
+  border-top: 2px solid #999;
+  background-color: #222;
+}
+header .menu-bar .menu-list {
+  display: flex;
+  height: 100%;
+  width: 100%;
+  flex-direction: row;
+  list-style: none;
+  justify-content: center;
+}
+header .menu-bar .menu-list a {
+  text-decoration: none;
+  color: inherit;
+  line-height: 100px;
+  flex-grow: 1;
+  text-align: center;
+  transition: 0.4s;
+}
+header .menu-bar .menu-list a:hover {
+  color: #bbb;
+  background-color: #555;
+}
+
+main {
+  width: 100%;
+  padding: 5em 5%;
+}
+
+.all-books {
+  width: 100%;
+  display: flex;
+  flex-flow: row wrap;
+  align-items: stretch;
+  justify-content: space-between;
+  margin: auto;
+}
+.all-books::after {
+  content: "";
+  flex: 1 1 auto;
+  max-width: 29%;
+  margin-left: 1.8em;
+  margin-right: 1.8em;
+}
+.all-books .book-item {
+  flex: 0 1 auto;
+  width: 29%;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  min-width: 350px;
+  margin: 1.8em;
+  border-radius: 30px;
+  position: relative;
+  overflow: hidden;
+  background-color: #777;
+  padding: 20px;
+  text-decoration: none;
+  color: inherit;
+  transition: 0.4s;
+}
+.all-books .book-item:hover {
+  color: #222;
+  background-color: #ccc;
+}
+.all-books .book-item-author {
+  font-size: 18px;
+}
+.all-books .book-item-title::after {
+  content: "";
+  margin: 0.5em 0;
+  display: block;
+  width: 50%;
+  height: 1px;
+  background-color: black;
+}
+.all-books .book-image {
+  width: 50%;
+}
+.all-books .book-image .book-img {
+  width: 80%;
+  min-width: 200px;
+}
+
+.searchbar {
+  width: 100%;
+  height: 50px;
+  position: relative;
+}
+.searchbar-form {
+  height: 100%;
+}
+.searchbar-form input {
+  width: 100%;
+  height: 100%;
+  padding-left: 35px;
+}
+.searchbar-image {
+  position: absolute;
+  height: 20px;
+  width: 20px;
+  top: calc(50% - 13px);
+  left: 10px;
+}
+.searchbar-button {
+  position: absolute;
+  top: 0;
+  right: 0;
+  height: 50px;
+  width: 8%;
+  min-width: 80px;
+}
+.searchbar-button button {
+  height: 100%;
+  width: 100%;
+  cursor: pointer;
+}
+
+.form {
+  margin: auto;
+  width: 50%;
+  border: #666 solid 2px;
+  border-radius: 20px;
+  text-align: center;
+}
+.form-content {
+  padding: 5%;
+}
+.form-field {
+  width: 100%;
+  margin-bottom: 2em;
+}
+.form-field label {
+  display: block;
+  font-size: 20px;
+  text-align: center;
+  margin-bottom: 1em;
+}
+.form-field input {
+  width: 100%;
+  height: 50px;
+  padding-left: 10px;
+  border-radius: 5px;
+  margin-bottom: 0.6em;
+  transition: 0.4s;
+}
+.form-field input:focus {
+  outline-width: 0;
+  box-shadow: #333 3px 3px;
+}
+.form-field button {
+  width: 80%;
+  height: 40px;
+  border-radius: 10px;
+  background-color: #bbb;
+  transition: 0.4s;
+}
+.form-field button i {
+  color: #222;
+}
+.form-field button:hover {
+  background-color: #999;
+}
+
+.flash-message {
+  position: fixed;
+  min-width: 300px;
+  height: 80px;
+  border-radius: 10px;
+  border: 3px solid green;
+  color: #eee;
+  top: 50px;
+  z-index: 10;
+  background-color: rgba(71, 192, 47, 0.748);
+}
+.flash-message p {
+  padding: 10px;
+  padding-right: 30px;
+  line-height: 60px;
+  width: 100%;
+  height: 100%;
+  text-align: center;
+}
+.flash-message i {
+  position: absolute;
+  left: 5%;
+  top: 36%;
+}
+
+.error {
+  color: red;
+  font-size: 12px;
+}
+
+.all-users {
+  width: 100%;
+}
+.all-users .admin-panel {
+  width: 100%;
+  border: 1px solid black;
+}
+.all-users .admin-panel-row {
+  height: 60px;
+}
+.all-users .admin-panel-row:first-child {
+  border-bottom: 2px solid black;
+  height: 80px;
+}
+.all-users .admin-panel .first-row {
+  font-size: 20px;
+}
+.all-users .admin-panel-cell {
+  text-align: center;
+}
+.all-users .admin-panel-cell .remove {
+  background-color: rgb(218, 50, 50);
+  width: 40px;
+  height: 40px;
+  border-radius: 40px;
+  border: none;
+  color: #eee;
+  transition: 0.4s;
+}
+.all-users .admin-panel-cell .remove:hover {
+  background-color: rgb(189, 16, 16);
+}
+.all-users .admin-panel-cell .add {
+  background-color: rgb(40, 142, 36);
+  width: 40px;
+  height: 40px;
+  border-radius: 40px;
+  border: none;
+  color: #eee;
+  transition: 0.4s;
+}
+.all-users .admin-panel-cell .add:hover {
+  background-color: rgb(19, 212, 64);
+}
+.all-users .admin-panel-cell input {
+  border: none;
+  text-align: center;
+}
+.all-users .admin-panel-cell input:focus {
+  outline: none;
+}
+
+select {
+  background-color: white;
+  border: thin solid blue;
+  border-radius: 4px;
+  display: inline-block;
+  font: inherit;
+  line-height: 1.5em;
+  padding: 0.5em 3.5em 0.5em 1em;
+  margin: 0;
+  box-sizing: border-box;
+  -webkit-appearance: none;
+  -moz-appearance: none;
+}
+
+select.classic {
+  background-image: linear-gradient(45deg, transparent 50%, blue 50%), linear-gradient(135deg, blue 50%, transparent 50%), linear-gradient(to right, skyblue, skyblue);
+  background-position: calc(100% - 20px) calc(1em + 2px), calc(100% - 15px) calc(1em + 2px), 100% 0;
+  background-size: 5px 5px, 5px 5px, 2.5em 2.5em;
+  background-repeat: no-repeat;
+}
+
+select.classic:focus {
+  background-image: linear-gradient(45deg, white 50%, transparent 50%), linear-gradient(135deg, transparent 50%, white 50%), linear-gradient(to right, gray, gray);
+  background-position: calc(100% - 15px) 1em, calc(100% - 20px) 1em, 100% 0;
+  background-size: 5px 5px, 5px 5px, 2.5em 2.5em;
+  background-repeat: no-repeat;
+  border-color: grey;
+  outline: 0;
+}
+
+.switch {
+  position: relative;
+  display: inline-block;
+  width: 60px;
+  height: 34px;
+}
+
+/* Hide default HTML checkbox */
+.switch input {
+  opacity: 0;
+  width: 0;
+  height: 0;
+}
+
+/* The slider */
+.slider {
+  position: absolute;
+  cursor: pointer;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: #ccc;
+  transition: 0.4s;
+}
+
+.slider:before {
+  position: absolute;
+  content: "";
+  height: 26px;
+  width: 26px;
+  left: 4px;
+  bottom: 4px;
+  background-color: white;
+  transition: 0.4s;
+}
+
+input:checked + .slider {
+  background-color: #2196f3;
+}
+
+input:focus + .slider {
+  box-shadow: 0 0 1px #2196f3;
+}
+
+input:checked + .slider:before {
+  transform: translateX(26px);
+}
+
+/* Rounded sliders */
+.slider.round {
+  border-radius: 34px;
+}
+
+.slider.round:before {
+  border-radius: 50%;
+}
+
+div.book-info-wrap {
+  width: 100%;
+}
+
+.book-info-panel {
+  width: 100%;
+  border: 1px solid black;
+}
+.book-info-panel-row {
+  height: 60px;
+}
+.book-info-panel-row:first-child {
+  border-bottom: 2px solid black;
+  height: 80px;
+}
+.book-info-panel .first-row {
+  font-size: 20px;
+}
+.book-info-panel-cell {
+  text-align: center;
+}
+.book-info-panel-cell .block {
+  background-color: rgb(218, 50, 50);
+  width: 40px;
+  height: 40px;
+  border-radius: 40px;
+  border: none;
+  color: #eee;
+  transition: 0.4s;
+}
+.book-info-panel-cell .block:hover {
+  background-color: rgb(189, 16, 16);
+}
+.book-info-panel-cell .return {
+  background-color: rgb(40, 142, 36);
+  width: 40px;
+  height: 40px;
+  border-radius: 40px;
+  border: none;
+  color: #eee;
+  transition: 0.4s;
+}
+.book-info-panel-cell .return:hover {
+  background-color: rgb(19, 212, 64);
+}
+.book-info-panel-cell .give {
+  background-color: rgb(219, 184, 43);
+  width: 40px;
+  height: 40px;
+  border-radius: 40px;
+  border: none;
+  color: #eee;
+  transition: 0.4s;
+}
+.book-info-panel-cell .give:hover {
+  background-color: rgb(245, 207, 57);
+}
+.book-info-panel-cell input {
+  border: none;
+  text-align: center;
+}
+.book-info-panel-cell input:focus {
+  outline: none;
+}
+
+.switch-slide {
+  width: 300px;
+  height: 100px;
+  display: flex;
+  justify-content: left;
+  align-items: center;
+  position: relative;
+}
+.switch-slide p {
+  position: absolute;
+  left: 80px;
+  top: 38px;
+}
+
+.rent-btn {
+  background-color: rgb(40, 142, 36);
+  width: 40px;
+  height: 40px;
+  border-radius: 40px;
+  border: none;
+  color: #eee;
+  transition: 0.4s;
+}
+.rent-btn:hover {
+  background-color: rgb(19, 212, 64);
+}
+
+.remove-btn {
+  background-color: rgb(218, 50, 50);
+  width: 40px;
+  height: 40px;
+  border-radius: 40px;
+  border: none;
+  color: #eee;
+  transition: 0.4s;
+}
+.remove-btn:hover {
+  background-color: rgb(189, 16, 16);
+}
+
+.buttons {
+  display: flex;
+  justify-content: space-between;
+}/*# sourceMappingURL=style.css.map */
