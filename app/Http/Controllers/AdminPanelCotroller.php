@@ -20,7 +20,7 @@ class AdminPanelCotroller extends Controller
         $user = User::find($request['userId']);
         if ($request['function'] == "ADD"){
             if($user -> hasRole($request['role'])){
-                return redirect('/admin')->with('message', 'User już ma tą rolę!');
+                return redirect('/admin')->with('message-err', 'User już ma tą rolę!');
             }
             $user -> assignRole($request['role']);
             DB::update('update users set modified_by = ? where id_user = ?', [auth()->user()->id_user,$request['userId']]);
@@ -29,10 +29,10 @@ class AdminPanelCotroller extends Controller
         }
         elseif($request['function'] == "REMOVE"){
             if($user == auth()->user() && $request['role'] == "Admin"){
-                return redirect('/admin')->with('message', 'Nie możesz usunąć sobie roli administratora!');
+                return redirect('/admin')->with('message-err', 'Nie możesz usunąć sobie roli administratora!');
             }
             if(!($user -> hasRole($request['role']))){
-                return redirect('/admin')->with('message', 'Ten user nie ma takiej roli!');
+                return redirect('/admin')->with('message-err', 'Ten user nie ma takiej roli!');
             }
             $user->removeRole($request['role']);
             DB::update('update users set modified_by = ? where id_user = ?', [auth()->user()->id_user,$request['userId']]);
@@ -41,26 +41,26 @@ class AdminPanelCotroller extends Controller
         }
         elseif($request['function'] == "DELETE"){
             if($user == auth()->user()){
-                return redirect('/admin')->with('message', 'Nie możesz usunąć konta na którym jesteś zalogowany!');
+                return redirect('/admin')->with('message-err', 'Nie możesz usunąć konta na którym jesteś zalogowany!');
             }
             if($user->books_rented > 0){
-                return redirect('/admin')->with('message', 'Nie możesz usunąć konta które ma coś wypożyczone!');
+                return redirect('/admin')->with('message-err', 'Nie możesz usunąć konta które ma coś wypożyczone!');
             }
             $user->delete();
             return redirect('/admin')->with('message', 'User Usunięty!');
         }
         elseif($request['function'] == "block"){
             if($user == null){
-                return redirect('/')->with('message', 'Nie ma takiego użytkownika!');
+                return redirect('/')->with('message-err', 'Nie ma takiego użytkownika!');
             }
             if($user == auth()->user()){
-                return redirect('/')->with('message', 'Nie możesz zablokować siebie.');
+                return redirect('/')->with('message-err', 'Nie możesz zablokować siebie.');
             }
             if(!($user -> hasRole('Klient'))){
                 if(($user -> hasRole('Bibliotekarz')) || ($user -> hasRole('Admin'))){
-                    return redirect('/')->with('message', 'Możesz blokować tylko klientów.');
+                    return redirect('/')->with('message-err', 'Możesz blokować tylko klientów.');
                 }
-                return redirect('/')->with('message', 'Użytkownik już zablokowany.');
+                return redirect('/')->with('message-err', 'Użytkownik już zablokowany.');
             }
             
             $user->removeRole('Klient');

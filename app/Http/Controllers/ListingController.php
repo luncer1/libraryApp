@@ -83,13 +83,13 @@ class ListingController extends Controller
     public function rent(Request $request){
         $user_age = Carbon::parse(auth()->user()->birth_date)->age;
         if($user_age < $request->age_to_rent){
-            return redirect('/')->with('message','Jesteś za młody aby to wypożyczyć.');
+            return redirect('/')->with('message-err','Jesteś za młody aby to wypożyczyć.');
         }
         $id = auth()->user()->id_user;
         $date = date('Y-m-d');
         $books_rented = DB::table('users')->whereRaw("id_user = '$id'")->value('books_rented');
         if($books_rented >= 2){
-            return redirect('/')->with('message','Możesz mieć max 2 książki na raz');
+            return redirect('/')->with('message-err','Możesz mieć max 2 książki na raz');
         }
         DB::update('update users set books_rented = ? where id_user = ?', [$books_rented+1,$id]);
         DB::update('update users set updated_at = ? where id_user = ?', [date('Y-m-d H:i:s'),$id]);
@@ -138,7 +138,7 @@ class ListingController extends Controller
     }
     public function removebook(Request $request){
         if($request['is_rented']){
-            return redirect('/book/'.$request['id_book'])->with('message','Nie możesz usunąć książki, która jest wypożyczona!');
+            return redirect('/book/'.$request['id_book'])->with('message-err','Nie możesz usunąć książki, która jest wypożyczona!');
         }
         DB::update('update books set active = ? where id_book = ?', [0,$request->id_book]);
         return redirect('/')->with('message','Książka usunięta!');

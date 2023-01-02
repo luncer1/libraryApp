@@ -53,6 +53,7 @@
     </header>
     <main>
         <x-flash-message />
+        <x-flash-error />
         {{ $slot }}
     </main>
 

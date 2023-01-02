@@ -2,9 +2,9 @@
     @if ($listing->active)
     <div class="book-item">
         <h2 class="book-item-title">Tytuł: {{$listing->title}}</h2>
-        <p class="book-item-author">Autor: {{ DB::table('authors')->whereRaw("id_author =  '$listing->author'")->value('author_name')}}  {{ DB::table('authors')->whereRaw("id_author =  '$listing->author'")->value('author_surname')}}</p>
-        <p class="book-item-publisher">Wydawca: {{ DB::table('publishers')->whereRaw("id_publisher =  '$listing->publisher_id'")->value('publisher_name')}}</p> 
-        <p class="book-item-cathegory">Kategoria: {{ DB::table('cathegories')->whereRaw("id_cathegory =  '$listing->cathegory_id'")->value('cathegory_name')}}</p> 
+        <p class="book-item-author">Autor: <a href="/?search={{ DB::table('authors')->whereRaw("id_author =  '$listing->author'")->value('author_name')}}" class = "book-link">{{ DB::table('authors')->whereRaw("id_author =  '$listing->author'")->value('author_name')}}  {{ DB::table('authors')->whereRaw("id_author =  '$listing->author'")->value('author_surname')}}</a></p>
+        <p class="book-item-publisher">Wydawca: <a href="/?search={{ DB::table('publishers')->whereRaw("id_publisher =  '$listing->publisher_id'")->value('publisher_name')}}" class = "book-link">{{ DB::table('publishers')->whereRaw("id_publisher =  '$listing->publisher_id'")->value('publisher_name')}}</a></p> 
+        <p class="book-item-cathegory">Kategoria: <a href="/?search={{ DB::table('cathegories')->whereRaw("id_cathegory =  '$listing->cathegory_id'")->value('cathegory_name')}}" class = "book-link">{{ DB::table('cathegories')->whereRaw("id_cathegory =  '$listing->cathegory_id'")->value('cathegory_name')}}</a></p> 
     <p class="book-item-age">Można wypożyczyć od {{ $listing->age_to_rent}} @if ($listing->age_to_rent == 1)roku @else lat
         
     @endif</p> 
