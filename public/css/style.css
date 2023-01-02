@@ -29,7 +29,7 @@ header .login-bar .login-list {
   list-style: none;
 }
 header .login-bar .login-list .login-element {
-  min-width: 200px;
+  width: 150px;
 }
 header .login-bar .login-list a {
   text-decoration: none;
