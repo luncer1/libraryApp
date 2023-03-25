@@ -1,6 +1,4 @@
-@if(session()->has('message'))
-    <div x-data="{show:true}" x-init="setTimeout(()=>show=false,5000)"  x-show="show" class="flash-message">
+    <div style="display:none" class="flash-message flash-success">
         <i class="fa-sharp fa-solid fa-square-check"></i>
-        <p> {{ session('message') }}</p>
+        <p class="success-content"> </p>
     </div>
-@endif

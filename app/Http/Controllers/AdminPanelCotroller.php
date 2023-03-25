@@ -17,37 +17,38 @@ class AdminPanelCotroller extends Controller
     }
 
     public function userhandle(Request $request){
+
         $user = User::find($request['userId']);
         if ($request['function'] == "ADD"){
             if($user -> hasRole($request['role'])){
-                return redirect('/admin')->with('message-err', 'User już ma tą rolę!');
+                return response()->json(['id_user'=>$user->id_user,'roles'=>$user->roles,'status'=>201,'message'=>"Użytkownik ma już tą rolę!"]);
             }
             $user -> assignRole($request['role']);
             DB::update('update users set modified_by = ? where id_user = ?', [auth()->user()->id_user,$request['userId']]);
             DB::update('update users set updated_at = ? where id_user = ?', [date('Y-m-d H:i:s'),$request['userId']]);
-            return redirect('/admin')->with('message', 'Rola Dodana!');
+            return response()->json(['id_user'=>$user->id_user,'roles'=>$user->roles,'status'=>200,'message'=>"Rola dodana!"]);
         }
         elseif($request['function'] == "REMOVE"){
             if($user == auth()->user() && $request['role'] == "Admin"){
-                return redirect('/admin')->with('message-err', 'Nie możesz usunąć sobie roli administratora!');
+                return response()->json(['id_user'=>$user->id_user,'roles'=>$user->roles,'status'=>201,'message'=>"Nie możesz usunąć sobie roli administratora!"]);
             }
             if(!($user -> hasRole($request['role']))){
-                return redirect('/admin')->with('message-err', 'Ten user nie ma takiej roli!');
+                return response()->json(['id_user'=>$user->id_user,'roles'=>$user->roles,'status'=>201,'message'=>"Ten user nie ma takiej roli!"]);
             }
             $user->removeRole($request['role']);
             DB::update('update users set modified_by = ? where id_user = ?', [auth()->user()->id_user,$request['userId']]);
             DB::update('update users set updated_at = ? where id_user = ?', [date('Y-m-d H:i:s'),$request['userId']]);
-            return redirect('/admin')->with('message', 'Rola Usunięta!');
+            return response()->json(['id_user'=>$user->id_user,'roles'=>$user->roles,'status'=>200,'message'=>"Rola usunięta!"]);
         }
         elseif($request['function'] == "DELETE"){
             if($user == auth()->user()){
-                return redirect('/admin')->with('message-err', 'Nie możesz usunąć konta na którym jesteś zalogowany!');
+                return response()->json(['id_user'=>$user->id_user,'roles'=>$user->roles,'status'=>201,'message'=>"Nie możesz usunąć konta na którym jesteś zalogowany!"]);
             }
             if($user->books_rented > 0){
-                return redirect('/admin')->with('message-err', 'Nie możesz usunąć konta które ma coś wypożyczone!');
+                return response()->json(['id_user'=>$user->id_user,'roles'=>$user->roles,'status'=>201,'message'=>"Nie możesz usunąć konta które ma coś wypożyczone!"]);
             }
             $user->delete();
-            return redirect('/admin')->with('message', 'Użytkownik Usunięty!');
+            return response()->json(['id_user'=>$user->id_user,'roles'=>$user->roles,'status'=>200,'message'=>"Użytkownik Usunięty!"]);
         }
         elseif($request['function'] == "block"){
             if($user == null){
@@ -62,7 +63,7 @@ class AdminPanelCotroller extends Controller
                 }
                 return redirect('/')->with('message-err', 'Użytkownik już ma blokade.');
             }
-            
+
             $user->removeRole('Klient');
             DB::update('update users set modified_by = ? where id_user = ?', [auth()->user()->id_user,$request['userId']]);
             DB::update('update users set updated_at = ? where id_user = ?', [date('Y-m-d H:i:s'),$request['userId']]);
@@ -77,10 +78,10 @@ class AdminPanelCotroller extends Controller
                 DB::update('update books set is_rented = ? where id_book = ?', [0,DB::table('rents')->where('id_rent','=',$rented_id)->pluck('book_id')[0]]);
                 DB::update('update rents set return_date = ?, rent_state="Zwrócono" where user_id = ? and book_id = ?', [$date,$request['userId'], DB::table('rents')->where('id_rent','=',$rented_id)->pluck('book_id')[0]]);
             }
-            
+
             return redirect('/allrents')->with('message', 'Użytkownik zablokowany!');
         }
-        
+
     }
-   
+
 }
