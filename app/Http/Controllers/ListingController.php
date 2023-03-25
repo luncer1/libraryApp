@@ -15,7 +15,7 @@ class ListingController extends Controller
     //all items
     public function index(){
         return view('listings.index', [
-            'listings' => book::filter(request(['search']))->paginate(9)
+            'listings' => book::filter(request(['search']))->paginate(8)
         ]);
     }
     

@@ -17,21 +17,20 @@ header {
         flex-direction: column;
         align-items: flex-end;
         .login-list {
-            min-width: 25%;
             height: 100%;
             line-height: 60px;
             display: flex;
             flex-direction: row;
             justify-content: center;
             list-style: none;
-            .login-element {
-               width: 150px;
+            .login-element{
+                flex: 1 100%;
+                width: 200px;
             }
             a {
                 text-decoration: none;
-                flex-grow: 1;
                 color: inherit;
-                padding-left: 3%;
+                display: inline-block;
                 &:hover {
                     color: #bbb;
                 }
@@ -74,6 +73,10 @@ header {
                     background-color: #555;
                 }
             }
+            a.active{
+                color: #bbb;
+                background-color: #555;
+            }
         }
     }
 }
@@ -97,7 +100,7 @@ main {
     }
     .book-item {
         flex: 0 1 auto;
-        width: 29%;
+        width: 45%;
         display: flex;
         flex-direction: row;
         justify-content: space-between;

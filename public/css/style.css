@@ -20,7 +20,6 @@ header .login-bar {
   align-items: flex-end;
 }
 header .login-bar .login-list {
-  min-width: 25%;
   height: 100%;
   line-height: 60px;
   display: flex;
@@ -29,13 +28,13 @@ header .login-bar .login-list {
   list-style: none;
 }
 header .login-bar .login-list .login-element {
-  width: 150px;
+  flex: 1 100%;
+  width: 200px;
 }
 header .login-bar .login-list a {
   text-decoration: none;
-  flex-grow: 1;
   color: inherit;
-  padding-left: 3%;
+  display: inline-block;
 }
 header .login-bar .login-list a:hover {
   color: #bbb;
@@ -76,6 +75,10 @@ header .menu-bar .menu-list a:hover {
   color: #bbb;
   background-color: #555;
 }
+header .menu-bar .menu-list a.active {
+  color: #bbb;
+  background-color: #555;
+}
 
 main {
   width: 100%;
@@ -99,7 +102,7 @@ main {
 }
 .all-books .book-item {
   flex: 0 1 auto;
-  width: 29%;
+  width: 45%;
   display: flex;
   flex-direction: row;
   justify-content: space-between;

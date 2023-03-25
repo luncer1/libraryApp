@@ -1,5 +1,5 @@
 <div class="searchbar">
-    <form action="/" class="searchbar-form">
+    <form action="/" method="GET" class="searchbar-form">
         <div class="searchbar-image">
             <i class="fa-solid fa-magnifying-glass"></i>
         </div>

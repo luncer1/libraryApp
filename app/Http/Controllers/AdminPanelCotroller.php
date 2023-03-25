@@ -47,7 +47,7 @@ class AdminPanelCotroller extends Controller
                 return redirect('/admin')->with('message-err', 'Nie możesz usunąć konta które ma coś wypożyczone!');
             }
             $user->delete();
-            return redirect('/admin')->with('message', 'User Usunięty!');
+            return redirect('/admin')->with('message', 'Użytkownik Usunięty!');
         }
         elseif($request['function'] == "block"){
             if($user == null){
@@ -60,7 +60,7 @@ class AdminPanelCotroller extends Controller
                 if(($user -> hasRole('Bibliotekarz')) || ($user -> hasRole('Admin'))){
                     return redirect('/')->with('message-err', 'Możesz blokować tylko klientów.');
                 }
-                return redirect('/')->with('message-err', 'Użytkownik już zablokowany.');
+                return redirect('/')->with('message-err', 'Użytkownik już ma blokade.');
             }
             
             $user->removeRole('Klient');
