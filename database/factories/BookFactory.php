@@ -18,9 +18,9 @@ class BookFactory extends Factory
     {
         return [
             'title' => fake()->userName(),
-            'author' => 1,
-            'publisher_id' => 1,
-            'cathegory_id' => 1,
+            'author' => rand(1,3),
+            'publisher_id' => rand(1,4),
+            'cathegory_id' => rand(1,4),
             'ageToRent' => rand(0,18)
         ];
     }
